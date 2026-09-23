@@ -1,0 +1,20 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1789298062249,
+      "tag": "0000_famous_wendell_vaughn",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790001690726,
+      "tag": "0001_shocking_grey_gargoyle",
+      "breakpoints": true
+    }
+  ]
+}
