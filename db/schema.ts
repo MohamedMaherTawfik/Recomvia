@@ -3,11 +3,26 @@ import { index, integer, primaryKey, sqliteTable, text, uniqueIndex } from "driz
 
 export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
+  authProvider: text("auth_provider").notNull().default("chatgpt"),
+  providerSubject: text("provider_subject").notNull(),
   email: text("email").notNull(),
   displayName: text("display_name"),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
-});
+}, (table) => [
+  uniqueIndex("idx_users_provider_subject").on(table.authProvider, table.providerSubject),
+]);
+
+export const sessions = sqliteTable("sessions", {
+  tokenHash: text("token_hash").primaryKey(),
+  userId: text("user_id").notNull().references(() => users.id),
+  expiresAt: text("expires_at").notNull(),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  lastSeenAt: text("last_seen_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+}, (table) => [
+  index("idx_sessions_user").on(table.userId),
+  index("idx_sessions_expires").on(table.expiresAt),
+]);
 
 export const organizations = sqliteTable("organizations", {
   id: text("id").primaryKey(),

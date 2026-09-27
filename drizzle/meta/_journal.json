@@ -15,6 +15,13 @@
       "when": 1790001690726,
       "tag": "0001_shocking_grey_gargoyle",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790496967830,
+      "tag": "0002_google_sessions",
+      "breakpoints": true
     }
   ]
 }

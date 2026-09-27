@@ -316,8 +316,8 @@ export function ScanExperience() {
           </nav>
           <div className="flex items-center gap-2">
             <Button variant="ghost" size="sm" className="rounded-xl" onClick={() => setLocale(rtl ? "en" : "ar")}><Globe2 className="size-4" />{rtl ? "EN" : "العربية"}</Button>
-            <Link href="/dashboard" className="hidden text-sm font-bold text-slate-700 xl:block">{t.signin}</Link>
-            <MobileSiteMenu items={navigation} menuLabel={t.menu} ctaLabel={t.signin} ctaHref="/dashboard" direction={rtl ? "rtl" : "ltr"} />
+            <a href="/auth/google?return_to=%2Fdashboard" className="hidden text-sm font-bold text-slate-700 xl:block">{t.signin}</a>
+            <MobileSiteMenu items={navigation} menuLabel={t.menu} ctaLabel={t.signin} ctaHref="/auth/google?return_to=%2Fdashboard" direction={rtl ? "rtl" : "ltr"} />
           </div>
         </div>
       </header>

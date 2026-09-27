@@ -39,7 +39,7 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "app/api/test.js"  ],
   "exclude": [
     "node_modules",
     "examples"
