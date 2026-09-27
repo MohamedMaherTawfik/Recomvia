@@ -48,13 +48,13 @@ function workspaceName(user: ChatGPTUser) {
 export async function ensureWorkspace(user: ChatGPTUser): Promise<Workspace> {
   const db = database();
   await db.prepare(`
-    INSERT INTO users (id, email, display_name)
-    VALUES (?, ?, ?)
+    INSERT INTO users (id, auth_provider, provider_subject, email, display_name)
+    VALUES (?, 'chatgpt', ?, ?, ?)
     ON CONFLICT(id) DO UPDATE SET
       email = excluded.email,
       display_name = excluded.display_name,
       updated_at = CURRENT_TIMESTAMP
-  `).bind(user.userId, user.email.toLowerCase(), user.fullName || user.displayName).run();
+  `).bind(user.userId, user.userId, user.email.toLowerCase(), user.fullName || user.displayName).run();
 
   const existing = await db.prepare(`
     SELECT m.organization_id AS organizationId

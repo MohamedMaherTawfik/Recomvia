@@ -1,11 +1,11 @@
-import vinext from "vinext";
+﻿import vinext from "vinext";
 import { defineConfig } from "vite";
 import hostingConfig from "./.openai/hosting.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
 import { sites } from "./build/sites-vite-plugin";
 
-const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
-  "00000000-0000-4000-8000-000000000000";
+const RECOMVIA_DATABASE_ID = "b3b65136-1fa6-4ca5-85b8-cbba2b4adfaf";
+const RECOMVIA_ACCOUNT_ID = "f57fd42e13fce4de88a2f652514ad874";
 
 const { d1, r2 } = hostingConfig;
 
@@ -14,6 +14,10 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 const managedLinux = readExecutionProfile() === "managed-linux";
 
 const localBindingConfig = {
+  vars: {
+    APP_URL: "https://recomvia.recomvia.workers.dev",
+  },
+  account_id: RECOMVIA_ACCOUNT_ID,
   main: "vinext/server/fetch-handler",
   compatibility_flags: ["nodejs_compat"],
   d1_databases: d1
@@ -21,7 +25,7 @@ const localBindingConfig = {
         {
           binding: d1,
           database_name: "site-creator-d1",
-          database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
+          database_id: RECOMVIA_DATABASE_ID,
         },
       ]
     : [],
@@ -66,3 +70,6 @@ export default defineConfig(async () => {
     ],
   };
 });
+
+
+
